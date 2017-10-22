@@ -135,12 +135,20 @@ void incSecondHand() {
   incClockTime(clockHH, clockMM, clockSS);
   writeClockTime();
 
-  // Increment second hand
-  tickPin = (tickPin == D1 ? D2: D1);
-  digitalWrite(tickPin, HIGH);
-  delay(100);
-  digitalWrite(tickPin, LOW);
-  delay(100);
+  // Increment second hand with 16 cycles
+    for (int i=1;i<16;i++) {
+    tickPin = (tickPin == D1 ? D2: D1);
+    digitalWrite(tickPin, HIGH);
+    delay(22);
+    digitalWrite(tickPin, LOW);
+    delay(40);
+    tickPin = (tickPin == D1 ? D2: D1);
+    digitalWrite(tickPin, HIGH);
+    delay(22);
+    digitalWrite(tickPin, LOW);
+    delay(40);
+  }
+
 }
 
 // This will pulse the same pin, which will cause the second hand to vibrate but not advance.
